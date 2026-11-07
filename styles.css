@@ -1,0 +1,259 @@
+/* Importamos las fuentes de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;700&display=swap');
+
+/* =========================================
+   1. VARIABLES Y CONFIGURACIÓN GLOBAL
+   ========================================= */
+:root {
+    /* Paleta de colores solicitada */
+    --color-madera: #8B5E3C;
+    --color-madera-oscuro: #6B472B;
+    --color-beige: #F5F5DC;
+    --color-fondo: #FAFAFA;
+    --color-oliva: #6B8E23;
+    --color-oliva-oscuro: #55721C;
+    --color-texto: #333333;
+    --color-texto-claro: #666666;
+    
+    /* Tipografías con system-ui de respaldo */
+    --fuente-titulos: 'Poppins', system-ui, sans-serif;
+    --fuente-textos: 'Inter', system-ui, sans-serif;
+    
+    /* Sombras y bordes */
+    --sombra-suave: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --sombra-hover: 0 8px 15px rgba(0, 0, 0, 0.15);
+    --borde-radio: 12px;
+}
+
+/* Reseteo básico para asegurar consistencia en todos los navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fuente-textos);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: var(--fuente-titulos);
+    color: var(--color-madera);
+    margin-bottom: 1rem;
+}
+
+/* =========================================
+   2. ENCABEZADO Y NAVEGACIÓN
+   ========================================= */
+header {
+    background-color: var(--color-beige);
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--sombra-suave);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+/* =========================================
+   3. BOTONES (Generales y de Compra)
+   ========================================= */
+button {
+    font-family: var(--fuente-textos);
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: var(--borde-radio);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: var(--color-madera);
+    color: white;
+}
+
+/* Efecto hover: cambio de color y leve elevación */
+button:hover {
+    background-color: var(--color-madera-oscuro);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-hover);
+}
+
+/* Botones específicos de compra/acción positiva (Verde Oliva) */
+.btn-comprar, 
+button[type="submit"] {
+    background-color: var(--color-oliva);
+}
+
+.btn-comprar:hover, 
+button[type="submit"]:hover {
+    background-color: var(--color-oliva-oscuro);
+}
+
+/* =========================================
+   4. ESTRUCTURA PRINCIPAL Y TARJETAS
+   ========================================= */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Diseño general de tarjeta para formularios, items y paneles */
+.tarjeta {
+    background-color: white;
+    border-radius: var(--borde-radio);
+    padding: 1.5rem;
+    box-shadow: var(--sombra-suave);
+    margin-bottom: 1.5rem;
+}
+
+/* =========================================
+   5. CATÁLOGO Y GRILLA DE PRODUCTOS (Mobile First)
+   ========================================= */
+/* Mobile first: 1 sola columna por defecto */
+.grilla {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+/* Estructura de la tarjeta del producto */
+.tarjeta-producto {
+    background-color: white;
+    border-radius: var(--borde-radio);
+    box-shadow: var(--sombra-suave);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.tarjeta-producto:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-hover);
+}
+
+/* Imagen del producto con altura fija y cover */
+.tarjeta-producto img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.info-producto {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.precio-destacado {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-oliva);
+    margin: 0.5rem 0;
+}
+
+/* =========================================
+   6. FORMULARIOS Y FILTROS
+   ========================================= */
+form, #barra-filtros {
+    background-color: white;
+    border-radius: var(--borde-radio);
+    padding: 1.5rem;
+    box-shadow: var(--sombra-suave);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input, select {
+    font-family: var(--fuente-textos);
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--color-madera);
+    box-shadow: 0 0 0 2px rgba(139, 94, 60, 0.2);
+}
+
+/* =========================================
+   7. MEDIA QUERIES (Responsive - desde 768px)
+   ========================================= */
+@media (min-width: 768px) {
+    /* A partir de tablet, la grilla pasa a tener múltiples columnas */
+    .grilla {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    /* Los filtros se acomodan en una fila en pantallas más grandes */
+    #barra-filtros {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+/* =========================================
+   8. ESTILOS DE IMPRESIÓN (Print)
+   ========================================= */
+@media print {
+    /* Ocultamos el menú, encabezado y todo lo que no sea el presupuesto */
+    header, nav, button, #seccion-catalogo, #seccion-carrito, #seccion-administracion, #formulario-presupuesto {
+        display: none !important;
+    }
+
+    /* Aseguramos que la sección de presupuesto y el área final sean visibles */
+    #seccion-presupuesto, #area-presupuesto {
+        display: block !important;
+    }
+
+    /* Quitamos márgenes, sombras y colores de fondo para ahorrar tinta */
+    body, .tarjeta, main {
+        background-color: white !important;
+        box-shadow: none !important;
+        margin: 0;
+        padding: 0;
+    }
+
+    #area-presupuesto {
+        border: 2px solid var(--color-texto);
+        padding: 2rem;
+        border-radius: 0;
+    }
+}
+
+/* Estilos para errores y tabla de administración */
+.mensaje-error {
+    color: red;
+    font-size: 0.85rem;
+    display: none; /* Oculto por defecto */
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+#tabla-productos th, #tabla-productos td {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+}
+
+.miniatura-tabla {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+}
